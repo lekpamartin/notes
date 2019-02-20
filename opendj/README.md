@@ -1,12 +1,12 @@
 # OpenDJ
 
-# REST API
+## REST API
 ```bash
 _prettyPrint=true : format JSON
 ```
-## USER
+### USER
 
-## GROUP
+### GROUP
 
 Create group
 ```bash
