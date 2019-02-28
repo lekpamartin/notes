@@ -1,24 +1,4 @@
-#PYTHON
-
-### REST
-
-#### Requests
-```bash
-payload = '{ "cn" : "%s", "members" : [ %s ] }' %(cn,members)
-response = requests.request("PUT", url, data=payload, headers=headers, auth=("user", "password"), verify=False)
-```
-
-Disable "InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised."
-```bash
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
-requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
-```
-
-##### Proxy
-Exclude proxy for somes server/ip
-```bash
-os.environ['no_proxy'] = 'server1,ip1,server2,ip2'
-```
+# PYTHON
 
 ### LOOP
 
@@ -39,4 +19,39 @@ for key, value in data.items():
 ```bash
 for i in data.keys():
   print(i)
+```
+
+### JSON
+Build a JSON
+```bash
+myDict = dict()
+myDict["content"] = {}
+for j in items:
+  myDict["content"][project] = dict()
+  myDict["content"][project]["type"] = j["projectType"]
+  #Append if exist and affect if don't exist
+  try:
+    myDict["content"][project]["users"].append(user)
+  except KeyError:
+    myDict["content"][project]["users"] = [user]
+```
+
+### Proxy
+Exclude proxy for somes server/ip
+```bash
+os.environ['no_proxy'] = 'server1,ip1,server2,ip2'
+```
+
+### REST
+
+#### Requests
+```bash
+payload = '{ "cn" : "%s", "members" : [ %s ] }' %(cn,members)
+response = requests.request("PUT", url, data=payload, headers=headers, auth=("user", "password"), verify=False)
+```
+
+Disable "InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised."
+```bash
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 ```
