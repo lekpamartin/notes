@@ -20,7 +20,7 @@ gpg --list-keys
 ### Export key
 ```bash
 gpg --export -a <key> > RPM-GPG-KEY-<key>
-gpg
+```
  
 ### Default path
 ```bash
