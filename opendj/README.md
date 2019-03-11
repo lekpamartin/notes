@@ -8,7 +8,8 @@ _prettyPrint=true : format JSON
 
 User info
 ```bash
-URL/api/users/<group_name>
+URL/api/users/<user_name>
+```
 
 ### GROUP
 
