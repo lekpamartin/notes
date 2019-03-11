@@ -21,6 +21,13 @@ for i in data.keys():
   print(i)
 ```
 
+### FILE
+Probleme d'encodage ascii
+```bash
+f = open('/REP/file.json', 'rb')
+data = f.read().decode('utf8', 'ignore')
+```
+
 ### JSON
 Build a JSON
 ```bash
