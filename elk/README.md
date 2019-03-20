@@ -2,6 +2,15 @@
 
 ### ELASTICSEARCH
 
+#### Open distro
+Launch configuration
+```bash
+/usr/share/elasticsearch/plugins/opendistro_security/tools/securityadmin.sh -cd "/usr/share/elasticsearch/plugins/opendistro_security/securityconfig" -icl -key "/usr/share/elasticsearch/config/kirk-key.pem" -cert "/usr/share/elasticsearch/config/kirk.pem" -cacert "/usr/share/elasticsearch/config/root-ca.pem" -nhnv
+```
+Launch demo configuration (not for PRODUCTION)
+```bash
+/usr/share/elasticsearch/plugins/opendistro_security/tools/install_demo_configuration.sh
+```
 ### KIBANA
 
 ### LOGSTASH
