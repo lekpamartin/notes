@@ -62,3 +62,13 @@ Disable "InsecureRequestWarning: Unverified HTTPS request is being made. Adding 
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 ```
+
+### YAML
+
+#### Read file
+```bash
+stream = open("docker-compose.yml", "r")
+docs = yaml.load_all(stream, Loader=yaml.FullLoader)
+for doc in docs:
+  for k,v in doc.items():
+```
