@@ -1,0 +1,382 @@
+Tunnel
+
+#socat tcp-listen:PORT_ECOUTE proxy:PROXY_HOST:DESTINATION_HOST:DESTINATION_PORT &
+#svn --quiet checkout svn://0.0.0.0:3690/tags/${ZBX_VERSION} zabbix-${ZBX_VERSION}
+
+#USE CASE : faire passer le flux de svn://svn.zabbix.com:3690/tags/${ZBX_VERSION} dans le proxy ${PROXY_HOST}
+socat tcp-listen:3690 proxy:${PROXY_HOST}:svn.zabbix.com:3690 &
+svn --quiet checkout svn://0.0.0.0:3690/tags/${ZBX_VERSION} zabbix-${ZBX_VERSION}
+ou 
+EXIT='no'; while [ "$EXIT" == "no" ]; do socat tcp-listen:3690 proxy:${PROXY_HOST}:svn.zabbix.com:3690; svn checkout svn://0.0.0.0:3690/tags/${ZBX_VERSION} zabbix-${ZBX_VERSION} 1>/dev/null; EXIT='yes'; done
+
+
+
+socat tcp-listen:3690 proxy:fr.proxy.saint-gobain.com:svn.zabbix.com:3690 &
+svn checkout svn://0.0.0.0:3690/tags/3.4.10/frontends/php/ zabbix
+
+Retrouver un package ou une librairie sur Alpine 
+https://pkgs.alpinelinux.org/contents
+
+
+######################
+#
+#
+#  GIT
+#
+#
+######################
+
+Génération patch
+
+	1. cloner le repo
+
+	2. Faire les modifications 
+
+	3. Ajouter toutes fichiers modifiés
+		# git add -A
+	
+	4. Commiter les fichiers modifiés
+		# git commit –m 'Mise aux normes Saint Gobain'
+
+	5. Générer le fichier de patch  
+		# git format-patch HEAD~1
+		
+		
+Sauvegarde des identifiants
+	
+	# git config credential.helper store
+	# git pull
+	
+
+
+######################
+#
+#
+#  CERTIFICAT
+#
+#
+######################
+openssl req -x509 -nodes -days 1068 -newkey rsa:2048 -keyout server.key -out server.crt
+
+####################
+# 
+# VHOST
+
+1. Reverse proxy with DocumentRoot (local directory)
+
+        #Disable ProxyPass for /oauth
+	ProxyPass /oauth !
+
+        ProxyPass / http://localhost:3000/
+        ProxyPassReverse / http://localhost:3000/
+
+        #Redirect /oauth to local directory
+	Alias /oauth /var/www/html/oauth
+	
+	
+	
+	
+#################
+# BEAT
+
+# Catalina
+	- input_type: log
+	  paths:
+		- /REP/logs/catalina.out
+	  fields:
+		key1: name1
+		key2 : name2 
+	  fields_under_root: true
+	  #Commençant par exemple par 2018-08-03 13:17:58,537 ou Aug 03, 2018 2:23:24
+	  multiline.pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}|^[a-zA-Z]{3} [0-9]{2}, [0-9]{4}|Caused by'
+	  multiline.negate: true
+	  multiline.match: after
+  
+
+#################
+# LOGSTASH
+
+
+# FILTER
+
+- TOMCAT
+filter {
+
+	#Suppression de logs inutile 
+	if ("PATTERN" in [message]) {
+		drop {}
+	}
+
+
+	#Parsing de logs java
+	grok {
+		match => { "message" => "%{YEAR}-%{MONTHNUM}-%{MONTHDAY}[T ]%{HOUR}:%{MINUTE}:%{SECOND},%{INT}%{SPACE}%{LOGLEVEL:level}%{SPACE}%{NOTSPACE:Thread}[T ]%{NOTSPACE:Category}[T ]%{GREEDYDATA:message}" }
+		match => { "message" => "%{MONTH}[T ]%{MONTHDAY},[T ]%{YEAR}[T ]%{HOUR}:%{MINUTE}:%{SECOND}[T ]%{NOTSPACE:Meridiem}[T ]%{NOTSPACE:Thread}%{DATA:Category}%{LOGLEVEL:level}:[T ]%{GREEDYDATA:message}" }
+		match => { "message" => "Caused by:[T ]%{NOTSPACE:Thread}[T ]%{GREEDYDATA:message}" }
+		match => { "message" => "Exception in thread[T ]%{NOTSPACE:Thread}[T ]%{GREEDYDATA:message}" }
+		overwrite => [ "message" ]
+	}
+
+	date {
+		match  => ["event_timestamp", "dd/MMM/yyyy:HH:mm:ss Z"]
+		target => "@timestamp"
+	}
+
+	#Matching date à partir du 1er janvier 1970
+	#UNIX (sans miliseconde) et UNIX_MS
+	date {
+                        match  => ["timestamp", "UNIX_MS"]
+                        target => "@timestamp"
+	}
+
+
+	#Modification structure des logs
+	mutate {
+			remove_field => ["byte", "offset", "input_type","@version", "event_timestamp", "beat", "type", "source", "httpversion" ]
+			remove_tag => [ "beats_input_codec_plain_applied" ]
+	}
+
+	#Suppression des logs non conforme 
+	#if !("_grokparsefailure" in [tags]) {
+	#	mutate {
+	#		remove_field => [ "message" ]
+	#	}
+	#}
+
+}
+
+
+
+
+
+
+-JSON
+filter {
+
+	json {
+		source => "message"
+		target => "parsed_json"
+	}
+
+	#Pour exploser les sous structures du json
+	split {
+		field => "[parsed_json][field_to_explose]"
+	}
+
+	date {
+		match  => ["[parsed_json][timestamp]", "UNIX_MS"]
+		target => "@timestamp"
+	}
+
+
+	mutate {
+		#Creation de champs a partir d'entrée du "parsed_json"
+		#Il faut donner la valeur avec la forme de tableau
+		add_field => {
+			"api_correlationId" => "%{[parsed_json][correlationId}"
+			"api_hostname" => "%{[parsed_json][processInfo][hostname}"
+		}
+
+		#On supprime l'explosion du json une fois la récupération de nos champs faits
+		remove_field => [ "parsed_json" ]
+		remove_tag => [ "beats_input_codec_plain_applied" ]
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#################
+# ELASTICSEARCH
+
+/_search
+
+
+GET INDEX/_search
+{
+	"query": {
+		"match": {
+			"env": "prod"
+		}
+	},
+	"post_filter": {
+		"range" : {
+			"@timestamp" : {
+				"lt" : "now-1d/d"
+            }
+		}
+	}
+} 
+
+# QUERY: multi-critere
+
+GET INDEX/_search
+{
+	"query": {
+		"bool": {
+			"must": [
+			{
+				"match": {
+					"env": "prod"
+				}
+			},
+			{
+				"match": {
+					"host": "hostname"
+				}
+			}
+			]
+		}
+	},
+    "post_filter": {
+        "range" : {
+			"@timestamp" : {
+				"lt" : "now-1d/d"
+            }
+		}
+          
+	}
+} 
+
+
+
+
+curl : volatile 
+curl -X PUT "10.154.76.186:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
+{
+	"transient": {
+		"cluster.routing.allocation.enable": "all",
+		"cluster.routing.allocation.disk.threshold_enabled": true,
+		"cluster.routing.allocation.disk.watermark.low": "93%",
+		"cluster.routing.allocation.disk.watermark.high": "95%"
+	}
+}
+'
+
+Config file : persistent
+cluster.routing.allocation.disk.threshold_enabled: true
+cluster.routing.allocation.disk.watermark.low: 93%
+cluster.routing.allocation.disk.watermark.high: 95%
+
+
+http://localhost:9200/_cat/indices/*?v&s=pri.store.size:desc
+http://localhost:9200/_cat/indices?h=h,s,i,id,p,r,dc,dd,ss,creation.date.string
+http://localhost:9200/_cat/indices/*?s=creation.date.string:asc&h=s,i,dc,dd,ss,creation.date.string
+
+
+
+
+
+WGET
+
+Via ~/.wgetrc file:
+
+use_proxy=yes
+http_proxy=127.0.0.1:8080
+https_proxy=127.0.0.1:8080
+
+
+
+DOCKER
+
+Via ~/.docker/config.json 
+{
+        "auths": {
+                "dtr443.docker4sg.prd.cloudwatt.saint-gobain.net:443": {
+                        "auth": "XXX",
+                        "identitytoken": "XXX"
+                }
+        },
+        "HttpHeaders": {
+                "User-Agent": "Docker-Client/18.03.1-ce (linux)"
+        }
+}
+
+
+SVN
+
+Via ~/.subversion/servers ou /etc/subversion/servers :
+
+[global]
+http-proxy-exceptions = *.myowndomain.com
+http-proxy-host = proxyaddr.mydomain.com
+http-proxy-port = 3128
+http-proxy-username = userme
+http-proxy-password = passyou
+http-compression = no
+
+
+
+
+
+
+HARBOR API
+Copy and paste the contents of https://raw.githubusercontent.com/vmware/harbor/master/docs/swagger.yaml into http://editor.swagger.io/
+
+
+
+
+DOCKER
+yum install -y yum-utils device-mapper-persistent-data lvm2
+
+## Penser a installer EPEL au besoin pour les dépendances
+#wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+#rpm -ivh epel-release-latest-7.noarch.rpm
+
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+#yum -y install docker-ce
+
+##ou une version precise  
+yum list docker-ce --showduplicates | sort -r
+yum -y install docker-ce-<VERSION STRING>
+
+#yum-config-manager --enable extras
+For AWS: sudo yum-config-manager --enable rhui-REGION-rhel-server-extras
+#For Azure: sudo yum-config-manager --enable rhui-rhel-7-server-rhui-extras-rpms
+
+##Pour palier à cette erreur 
+##x509: certificate signed by unknown authority
+cat /etc/docker/daemon.json
+#{
+#    "insecure-registries" : [ "dtr443.docker4sg.prd.cloudwatt.saint-gobain.net:443" ]
+#}
+
+##Dans une configuration avec PROXY
+cat /etc/systemd/system/docker.service.d/proxy.conf
+[Service]
+Environment="HTTPS_PROXY=http://fr.proxy.saint-gobain.com:8084/"
+
+systemctl start docker
+
+docker login -u <USER> https://dtr443.docker4sg.prd.cloudwatt.saint-gobain.net:443
+#Fournir le mot de passe dans le prompt
+
+docker pull dtr443.docker4sg.prd.cloudwatt.saint-gobain.net:443/software-factory/zabbix_server:2018-01
+docker pull dtr443.docker4sg.prd.cloudwatt.saint-gobain.net:443/devops4sg/alpine:3.7
+
+yum -y install git
+git config --global http.sslVerify false
+git config --global user.name "Martin LEKPA"
+git config --global user.email martin.lekpa@ext.saint-gobain.com
+mkdir -p /data/repo
+git clone https://cerebro.digital-solutions.saint-gobain.com/operations/zabbix_server.git
