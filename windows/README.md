@@ -1,4 +1,4 @@
 # Package information
 ```bash
-wmic product get IdentifyingNumber, name, version'
+wmic product get IdentifyingNumber, name, version
 ```
