@@ -9,12 +9,18 @@ Permettent de configurer les parametres de la machine virtuelle : RAM, CPU, disq
 <br>
 Ajouter un disque de 10 GO
 ```bash
-["createhd", "--filename", "builds/packer-rhel-7-x86_64-virtualbox/sdb.vdi", "--size", "10240", "--format", "VDI"],
-["storageattach", "{{.Name}}", "--storagectl", "IDE Controller", "--port", "1", "--device", "1", "--type", "hdd", "--medium",  "builds/packer-rhel-7-x86_64-virtualbox/sdb.vdi"]
+vboxmanage": [
+  ["createhd", "--filename", "builds/packer-rhel-7-x86_64-virtualbox/sdb.vdi", "--size", "10240", "--format", "VDI"],
+  ["storageattach", "{{.Name}}", "--storagectl", "IDE Controller", "--port", "1", "--device", "1", "--type", "hdd", "--medium",  "builds/packer-rhel-7-x86_64-virtualbox/sdb.vdi"]
+]
 ````
 Modifier la mémoire video (vram)
 ```bash
 ["modifyvm", "{{.Name}}", "--vram", "16"]
+````
+Activer le copier/coller (drag and drop) sur la VM
+```bash
+[ "controlvm", "{{.Name}}", "draganddrop", "bidirectional" ]
 ````
 ## post-processors
 ## provisioners
