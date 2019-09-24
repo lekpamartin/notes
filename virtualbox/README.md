@@ -17,5 +17,8 @@ Paravirtualized network adapter (virtio-net)
 
 ### VBoxManage
 
+```bash
+./VBoxManage showvminfo VM_NAME
+```
 ## Docs
 https://blogs.oracle.com/scoter/networking-in-virtualbox-v2
