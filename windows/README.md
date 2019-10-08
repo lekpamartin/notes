@@ -1,6 +1,12 @@
 #ISO
 https://download.boutique-pcland-officiel.fr/iso/
 
+# Certificates 
+Ajouter un certificat dans les "Autorités de certification racines de confiance"
+```bash
+certutil.exe -addstore Root $CA-FILE
+```
+
 # Package 
 Afficher les informations sur les packages installés
 ```bash
