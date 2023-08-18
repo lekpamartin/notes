@@ -17,4 +17,6 @@ https://www.dynatrace.com/support/help/dynatrace-api
 # Configuration as Code
 https://www.dynatrace.com/support/help/manage/configuration-as-code
 https://github.com/Dynatrace/dynatrace-configuration-as-code
-https://dynatrace.github.io/dynatrace-configuration-as-code/
+https://dynatrace.github.io/dynatrace-configuration-as-code
+
+
