@@ -1,4 +1,7 @@
-#Collect 
+# Collect 
+
+# Détection de deploiement d'une nouvelle version
+https://www.dynatrace.com/support/help/platform-modules/cloud-automation/release-monitoring/version-detection-strategies
 
 ## Gestion des evenements 
 https://www.dynatrace.com/support/help/platform-modules/cloud-automation/release-monitoring/version-detection-strategies
