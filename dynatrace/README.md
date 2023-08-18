@@ -9,7 +9,10 @@ https://www.dynatrace.com/support/help/platform-modules/cloud-automation/release
 ## Jenkins to Dynatrace 
 https://www.dynatrace.com/news/blog/simplify-and-standardize-dynatrace-integration-to-jenkins-software-delivery-pipelines-with-shared-libraries/
 
-# API
+# Infrastructure as Code
 
-## V2
+## API V2
 https://www.dynatrace.com/support/help/dynatrace-api
+
+# Configuration as Code
+https://www.dynatrace.com/support/help/manage/configuration-as-code
