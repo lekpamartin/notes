@@ -19,5 +19,8 @@ https://www.dynatrace.com/support/help/manage/configuration-as-code
 https://github.com/Dynatrace/dynatrace-configuration-as-code
 https://dynatrace.github.io/dynatrace-configuration-as-code
 
-
+## Generate config.yaml
+```bash
+echo "configs:" > config.yaml; for i in `ls`; do echo -e "- id: ${i%.*}\n  config:\n    name: ${i%.*}\n    template: ${i%.*}.json\n    skip: false\n  type:\n    settings:\n    schema: builtin:management-zones\n    scope: environment" >> config.yaml; done
+```
 
