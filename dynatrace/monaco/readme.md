@@ -7,4 +7,5 @@ En vous mettant dans un dossier exporté, vous pouvez générer votre fichier co
 
 ### builtinmanagement-zones
 ```bash
-echo configs:;for i in `ls | grep -v config`; do name=`grep name $i | cut -d '"' -f4`; description=`grep description $i | cut -d '"' -f4`; echo -e "- id: ${name}\n  type:\n    settings:\n      schema: builtin:management-zones\n      schemaVersion: 1.0.5\n      scope: environment\n  config:\n    name: ${name}\n    template: ../templates/builtinmanagement-zones.json\n    skip: false\n    parameters:\n      laposte:\n        type: value\n        value:\n          description: $description"; done```
+echo configs:;for i in `ls | grep -v config`; do name=`grep name $i | cut -d '"' -f4`; description=`grep description $i | cut -d '"' -f4`; echo -e "- id: ${name}\n  type:\n    settings:\n      schema: builtin:management-zones\n      schemaVersion: 1.0.5\n      scope: environment\n  config:\n    name: ${name}\n    template: ../templates/builtinmanagement-zones.json\n    skip: false\n    parameters:\n      laposte:\n        type: value\n        value:\n          name: $name\n          description: $description"; done
+```
