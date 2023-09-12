@@ -7,7 +7,7 @@ Appeler une variable
 ```
 Appeler une variable et définir une valeur par defaut
 ```bash
-{{ or title "dfault" }}
+{{ or title "valeur par defaut" }}
 ```
 
 # Conditions 
