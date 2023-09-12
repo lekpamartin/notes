@@ -6,7 +6,7 @@ Appeler une variable
 {{ title }}
 ```
 Appeler une variable et définir une valeur par defaut
-Définir un valeur ```bash
+```bash
 {{ or title "dfault" }}
 ```
 
