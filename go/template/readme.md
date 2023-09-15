@@ -16,12 +16,12 @@ Appeler une variable et définir une valeur par defaut
 
 Si title existe 
 ```bash
-{{ if "title" }}
+{{ if title }}
 ```
 
 Si title est vide 
 ```bash
-{{if eq "title" "" }}
+{{if eq title "" }}
   <title>{{template "title"}} - {{ .SiteTitle }}</title>
 {{else}}
   <title>{{ .SiteTitle }}</title>
