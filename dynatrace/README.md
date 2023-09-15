@@ -1,3 +1,6 @@
+# Configuration 
+SL0 => Anomaly detection (metrics events) => alerting profile => pb notification
+
 # Collect 
 
 # Détection de deploiement d'une nouvelle version
