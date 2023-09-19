@@ -1,5 +1,3 @@
-https://pkg.go.dev/text/template
-
 # Variables 
 Appeler une variable 
 ```bash
@@ -27,3 +25,8 @@ Si title est vide
   <title>{{ .SiteTitle }}</title>
 {{end}}
 ```
+
+# Pour aller plus loin
+https://pkg.go.dev/text/template
+https://developer.hashicorp.com/nomad/tutorials/templates/go-template-syntax
+
