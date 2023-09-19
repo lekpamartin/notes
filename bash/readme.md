@@ -11,8 +11,15 @@ a=file1.json
 b=file2.json
 echo ${a%.*}
 echo ${b#*.}
+```
 
-# iconv
+# Encodage fichier 
+
+## Afficher 
+```bash
+file -i input.file
+```
+## Convertir 
 Convertir l'encodage d'un fichier 
 ```bash
 iconv -f ISO-8859-1 -t UTF-8//TRANSLIT input.file -o out.file
