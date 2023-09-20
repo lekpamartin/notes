@@ -6,7 +6,7 @@ Il faut ajouter un point devant le nom du job
 ```
 
 # SHARED VAR
-
+```bash
 stage1:
   script:
     - ACTIONS STAGE1
@@ -22,3 +22,4 @@ stagen:
     - echo $MAVARIABLE # => mavalue
 dependencies:
     - stage1
+```
