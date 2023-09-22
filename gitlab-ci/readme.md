@@ -30,3 +30,6 @@ Par exemple pour un job trigger (ou autre), le bloc dependencies peut être reml
     - job: build
       artifacts: true
 ```
+
+# Docs
+https://docs.gitlab.com/ee/ci/pipelines/downstream_pipelines.html
