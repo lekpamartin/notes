@@ -24,7 +24,7 @@ stagen:
   dependencies:
     - stage1
 ```
-Le bloc dependencies peut être remlacé par 
+Par exemple pour un job trigger (ou autre), le bloc dependencies peut être remlacé par 
 ```bash
   needs:
     - job: build
