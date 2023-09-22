@@ -21,6 +21,12 @@ stagen:
   stage: deploy
   script:
     - echo $MAVARIABLE # => mavalue
-dependencies:
+  dependencies:
     - stage1
+```
+Le bloc dependencies peut être remlacé par 
+```bash
+  needs:
+    - job: build
+      artifacts: true
 ```
