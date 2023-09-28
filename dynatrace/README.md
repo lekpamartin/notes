@@ -1,6 +1,12 @@
 # Configuration 
 SL0 => Anomaly detection (metrics events) => alerting profile => pb notification
 
+## Management zone 
+Ajouter dans la zone de management les services indirects : DB, ...
+```bash
+"entitySelector": "type(queue),toRelationships.indirectlySendsToQueue(type(service),tag(key:value))"
+```
+
 # Collect 
 
 # Détection de deploiement d'une nouvelle version
