@@ -1,3 +1,9 @@
+# Configuration 
+Modifier le PATH
+```bash
+Barre de recherche -> Afficher les paramètres de système avancés -> Variables d'environnement
+```
+
 # Certificates 
 Ajouter un certificat dans les "Autorités de certification racines de confiance"
 ```bash
