@@ -12,7 +12,7 @@ https://www.jenkins.io/doc/book/pipeline/syntax/
 #### Parameters
 
 #### Environment
-Recupérer l'id du user qui lance le pipeline 
+Recupérer l'id du user qui lance le pipeline : Voir https://JENKINS_URL/job/JOB_NAME/job/SUBJOB_NAME/job/main/JOB_ID/api/json?pretty=true
 ```bash
 USER_ID = ${currentBuild.getBuildCauses()[0].userId}
 ```
