@@ -8,6 +8,7 @@ Demander la création d'une PR/MR lors du push
 ```bash
 git push -o merge_request.create
 ```
+D'autres options pour le merge request : https://docs.gitlab.com/ee/user/project/push_options.html#push-options-for-merge-requests 
 
 # Errors
 error: src refspec BRANCH does not match any
