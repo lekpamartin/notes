@@ -15,7 +15,7 @@ error: src refspec BRANCH does not match any
 ```bash
 git remote add origin https://USER:PASSWORD6TOKEN@HOSTNAME/REPO.git
 ```
-Vous pouvez avoir une erreur 
+Vous pouvez avoir une erreur : error: remote origin already exists.
 ```bash
 git remote set-url origin https://USER:PASSWORD6TOKEN@HOSTNAME/REPO.git
 ```
