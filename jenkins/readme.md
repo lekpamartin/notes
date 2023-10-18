@@ -16,6 +16,7 @@ Recupérer l'id du user qui lance le pipeline : Voir https://JENKINS_URL/job/JOB
 ```bash
 USER_ID = ${currentBuild.getBuildCauses()[0].userId}
 ```
+Le mieux est d'utiliser le plugin https://plugins.jenkins.io/build-user-vars-plugin/ 
 Créer une variable avec un identifiant : 
 ##### Secret text
 ```bash
