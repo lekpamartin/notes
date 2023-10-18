@@ -14,3 +14,7 @@ error: src refspec BRANCH does not match any
 ```bash
 git remote add origin https://USER:PASSWORD6TOKEN@HOSTNAME/REPO.git
 ```
+Vous pouvez avoir une erreur 
+```bash
+git remote set-url origin https://USER:PASSWORD6TOKEN@HOSTNAME/REPO.git
+```
