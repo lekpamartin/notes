@@ -1,3 +1,13 @@
+# Push
+Créer la nouvelle branche sur le distant 
+```bash
+git push --set-upstream origin NOUVELLE_BRANCHE
+```
+Demander la création d'une PR/MR lors du push
+```bash
+git push -o merge_request.create
+```
+
 # Errors
 error: src refspec BRANCH does not match any
 ```bash
