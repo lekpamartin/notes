@@ -13,6 +13,12 @@ echo ${a%.*}
 echo ${b#*.}
 ```
 
+## Extract
+VAR_TO_EXTRACT="hier,aujourd'hui,demain"
+```bash
+IFS=, read -r EXTRACT1 EXTRACT2 EXTRACT3 <<< ${VAR_TO_EXTRACT}
+```
+
 # Encodage fichier 
 
 ## Afficher 
