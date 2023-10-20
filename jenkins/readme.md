@@ -10,6 +10,7 @@ https://www.jenkins.io/doc/book/pipeline/syntax/
 #### Agent
 
 #### Parameters
+Doc : https://www.jenkins.io/doc/book/pipeline/syntax/#parameters 
 
 #### Environment
 Recupérer l'id du user qui lance le pipeline : Voir https://JENKINS_URL/job/JOB_NAME/job/SUBJOB_NAME/job/main/JOB_ID/api/json?pretty=true
