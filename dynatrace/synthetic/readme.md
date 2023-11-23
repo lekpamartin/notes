@@ -25,3 +25,8 @@ evt.initEvent("change", false, true);
 element.dispatchEvent(evt);
 ```
 Le fichier sera fourni codé en BASE64
+
+# Liens utiles
+```bash
+https://docs.dynatrace.com/docs/platform-modules/digital-experience/synthetic-monitoring/browser-monitors/browser-clickpath-events
+```
