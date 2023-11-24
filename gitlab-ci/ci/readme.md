@@ -6,20 +6,7 @@ Il faut ajouter un point devant le nom du job
   script:
 ```
 # Loops jobs 
-```bash
-build:linux_${release}_${arch}:
-    stage: build
-    tags:
-        - ubuntu_${arch}
-    variables:
-        release: ${release}
-        arch: ${arch}
-    <<: *linux_build
-  with_items:
-    - { release: trusty, arch: amd64 }
-    - { release: trusty, arch: i386 }
-    - { release: xenial, arch: amd64 }
-```
+https://docs.gitlab.com/ee/ci/yaml/#extends
 
 # Variables 
 ## SHARED VAR
