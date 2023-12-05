@@ -37,3 +37,4 @@ Par exemple pour un job trigger (ou autre), le bloc dependencies peut être reml
 
 # Docs
 https://docs.gitlab.com/ee/ci/pipelines/downstream_pipelines.html
+https://repository.prace-ri.eu/git/help/user/project/push_options.md
