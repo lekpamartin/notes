@@ -18,7 +18,10 @@ VAR_TO_EXTRACT="hier,aujourd'hui,demain"
 ```bash
 IFS=, read -r EXTRACT1 EXTRACT2 EXTRACT3 <<< ${VAR_TO_EXTRACT}
 ```
-
+## Nombre de caractères
+```bash
+${#CCX} -> Nombre de caractères du contenu de la variable
+```
 # Encodage fichier 
 
 ## Afficher 
