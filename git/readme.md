@@ -1,4 +1,10 @@
 # CMD
+
+## Clean 
+Clean local working dir
+```bash
+git clean -d -x -f
+```
 ## Push
 Créer la nouvelle branche sur le distant 
 ```bash
