@@ -29,7 +29,7 @@ data = f.read().decode('utf8', 'ignore')
 ```
 
 ### JSON
-Build a JSON
+#### Build a JSON
 ```bash
 myDict = dict()
 myDict["content"] = {}
@@ -43,6 +43,14 @@ for j in items:
     myDict["content"][project]["users"] = [user]
 ```
 
+#### Merge JSON files
+```bash
+json_files = ["file1.json", "file2.json"]
+files_merged = list()
+for f1 in json_files:
+  with open(f1, 'r') as infile:
+    files_merged.extend(json.load(infile))
+```
 ### Proxy
 Exclude proxy for somes server/ip
 ```bash
