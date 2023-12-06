@@ -27,4 +27,4 @@ https://www.dynatrace.com/support/help/dynatrace-api
 https://www.dynatrace.com/support/help/manage/configuration-as-code
 https://github.com/Dynatrace/dynatrace-configuration-as-code
 https://dynatrace.github.io/dynatrace-configuration-as-code
-
+https://github.com/dynatrace-perfclinics/dynatrace-getting-started
