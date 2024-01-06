@@ -1,4 +1,6 @@
-# Upload de pieces jointes 
+# Upload de pieces jointes
+Script développé par Dynatrace 
+
 ```bash
 var cssselector = "input[type=file]"; //Replace with your file upload input selector
 var data = "data&colon;text/plain;base64, RmlsZXVwbG9hZHRlc3Q="; //Convert your file into base64 format and assign it to the data variable. Make sure that file size should be minimum as we will be adding this code to our synthetic script.
