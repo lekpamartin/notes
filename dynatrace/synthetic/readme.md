@@ -1,5 +1,5 @@
 # Upload de pieces jointes
-Script développé par Dynatrace 
+Ce script provient des forums Dynatrace
 
 ```bash
 var cssselector = "input[type=file]"; //Replace with your file upload input selector
