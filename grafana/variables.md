@@ -1,3 +1,5 @@
+https://grafana.com/docs/grafana/latest/dashboards/variables/
+
 Quelques conseils pour construire ses Query pour les variables en fonction des datasources : 
 
 # Elastic
