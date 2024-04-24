@@ -7,6 +7,6 @@ Lister les clés
 ```
 Prendre le champ à utiliser pour la liste de votre variable : 
 ```
-{"find": "terms", "field": "hostname.keyword"}
+{"find": "terms", "field": "FIELD.keyword"}
 ```
 Pour en savoir plus : https://grafana.com/docs/grafana/latest/datasources/elasticsearch/template-variables/ 
