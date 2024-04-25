@@ -15,5 +15,5 @@ https://storage.googleapis.com/plugins-community/[AUTEUR]-[NAME]-panel/release/[
 ```
 Vous pourrez donc l'installer avec cette commande 
 ```bash
-grafana-cli --pluginURL /ZIP-DIR plugins install andrewbmchugh-flow-panel
+grafana-cli --pluginURL /ZIP-LOCATION plugins install andrewbmchugh-flow-panel
 ```
