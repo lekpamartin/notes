@@ -6,6 +6,17 @@ Ajouter dans la zone de management les services indirects : DB, ...
 ```bash
 "entitySelector": "type(service),toRelationships.calls(type(service),tag(key:VALUE)),agentTechnologyType(N/A)"
 ```
+Ajouter dans la zone de management d'un projet GCP les instances Cloud Run : cloud:gcp:cloud_run_revision
+```bash
+"entitySelector": "type("cloud:gcp:cloud_run_revision"),fromRelationships.isChildOf(<entitySelector pour selectionner le projet>)"
+```
+Vous pouvez faire de même pour les autres éléments contenus dans le projet. Pour voir les éléments dans un projet GCP
+```bash
+curl -X 'GET' \
+  'URL/v2/entities/PROJECTID' \
+  -H 'accept: application/json; charset=utf-8' \
+  -H 'Authorization: Api-Token TOKEN'
+```
 
 # Collect 
 
